@@ -36,7 +36,7 @@ subOneSize = LEByteRead(inputFile, inputFileIdx + 3, 4) # Little Endian
 inputFileIdx += 4
 inputFile.seek(inputFileIdx)
 
-audioFormat = LEByteRead(inputFile, inputFileIdx + 1, 2) # Little Endian, 1 = PCM, linear qunatization
+audioFormat = LEByteRead(inputFile, inputFileIdx + 1, 2) # Little Endian, 1 = PCM, linear quantization
 inputFileIdx += 2
 inputFile.seek(inputFileIdx)
 
@@ -85,15 +85,19 @@ print("\n:: WAVE INPUT :: \n\nHeadID: " + str(chunkID)
 
 # 8 bit sound sampling, so every 8 bits is a sound sample.
 # 16 bit signed sampling would require different jump distance.
-inputFileIdx += int(subTwoSize.hex(), 16)
+inputFileIdx += int(subTwoSize.hex(), 16) - 1 # Subtracting one to line up for the loop
 outString = ""
-for i in range(0, int(subTwoSize.hex(), 16)):
+
+for i in range(0, int(subTwoSize.hex(), 16) - 1):
     soundData = LEByteRead(inputFile, inputFileIdx, 2)
 
-    inputFileIdx -= 2
+    inputFileIdx -= 1
     outString += str(soundData) + " "
 
     if i % 4 == 0:
         outString += "\n"
+    
+    outString += str(inputFileIdx) + "\n"
 
 print(outString)
+print(soundData)
