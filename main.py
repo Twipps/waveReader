@@ -88,16 +88,13 @@ print("\n:: WAVE INPUT :: \n\nHeadID: " + str(chunkID)
 inputFileIdx += int(subTwoSize.hex(), 16) - 1 # Subtracting one to line up for the loop
 outString = ""
 
-for i in range(0, int(subTwoSize.hex(), 16) - 1):
-    soundData = LEByteRead(inputFile, inputFileIdx, 2)
+for i in range(0, int((int(subTwoSize.hex(), 16)))):
+    soundData = LEByteRead(inputFile, inputFileIdx, 1) # one stepBack from the current position is 8 bytes
 
     inputFileIdx -= 1
-    outString += str(soundData) + " "
+    outString += str(soundData[0]) + " "
 
     if i % 4 == 0:
         outString += "\n"
     
-    outString += str(inputFileIdx) + "\n"
-
 print(outString)
-print(soundData)
