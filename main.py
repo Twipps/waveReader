@@ -2,7 +2,7 @@ import matplotlib.pyplot as plot
 import numpy as np
 
 # Reading the .WAV, mode rb is "read binary"
-inputFile = open("C:\\Users\\jsuchovi\\Desktop\\Jump.wav", mode="rb")
+inputFile = open("FILE_GOES_HERE", mode="rb")
 
 # to traverse backwards for little endian
 def LEByteRead(inData, position, stepsBack):
