@@ -2,6 +2,7 @@ import matplotlib.pyplot as plot
 import numpy as np
 
 # Reading the .WAV, mode rb is "read binary"
+# You could also set up a terminal argument to go here too
 inputFile = open("FILE_GOES_HERE", mode="rb")
 
 # to traverse backwards for little endian
