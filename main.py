@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plot
 import numpy as np
 
-# Using knowedge from my assembly class
-
 # Reading the .WAV, mode rb is "read binary"
 inputFile = open("C:\\Users\\jsuchovi\\Desktop\\Jump.wav", mode="rb")
 
