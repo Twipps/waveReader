@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plot
+import numpy as np
+
 # Using knowedge from my assembly class
 
 # Reading the .WAV, mode rb is "read binary"
@@ -86,15 +89,24 @@ print("\n:: WAVE INPUT :: \n\nHeadID: " + str(chunkID)
 # 8 bit sound sampling, so every 8 bits is a sound sample.
 # 16 bit signed sampling would require different jump distance.
 inputFileIdx += int(subTwoSize.hex(), 16) - 1 # Subtracting one to line up for the loop
+
 outString = ""
+xPlotValues = yPlotValues = np.array([])
 
 for i in range(0, int((int(subTwoSize.hex(), 16)))):
     soundData = LEByteRead(inputFile, inputFileIdx, 1) # one stepBack from the current position is 8 bytes
 
     inputFileIdx -= 1
+
+    xPlotValues = np.insert(xPlotValues, i, i*10)
+    yPlotValues = np.insert(yPlotValues, i, soundData[0])
     outString += str(soundData[0]) + " "
 
     if i % 4 == 0:
         outString += "\n"
     
 print(outString)
+
+plot.plot(xPlotValues, yPlotValues, color="blue", linestyle="--")
+plot.grid(True)
+plot.show()
